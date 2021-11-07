@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+	<title>Login Page</title>
+</head>
+<body>
+	
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="rr.png">
+    </div>
+  <form name="uploadForm">
+    <div>
+      <input id="uploadInput" type="file" name="myFiles"></div>
+      <span id="fileNum">English to Manglish !</span><br>
+    
+    <br>
+  </form>
+  <div id="formFooter">
+      <a class="underlineHover" href="https://www.buymeacoffee.com/mcqueen">Buy me a coffee :)</a>
+    </div>
+
+  </div>
+<script type="module" src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+<script src="mlen.js"></script>
+  <script>
+  function updateSize() {
+    let nBytes = 0,
+        oFiles = this.files;
+    
+    //document.getElementById("fileNum").innerHTML = sOutput;
+    /////////////////////////////////
+    Tesseract.recognize(
+  oFiles[0],
+  'mal+eng',
+  { logger: m => console.log(m) }
+).then(({ data: { text } }) => {
+  //alert( ml2en(text));
+  var trans = ml2en(text);
+  document.getElementById("fileNum").innerHTML = trans;
+})
+///////////////////////////////////////
+  }
+     
+  document.getElementById("uploadInput").addEventListener("change", updateSize, false);
+
+  </script>
+</body>
+</html>
